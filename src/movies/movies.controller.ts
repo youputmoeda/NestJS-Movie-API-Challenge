@@ -1,3 +1,4 @@
+// src/movies/movie.controller.ts
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { MoviesService } from "./movies.service";
@@ -11,8 +12,8 @@ export class MoviesController {
 
 	@ApiOperation({ summary: 'List all movies' })
 	@Get('ListMovies')
-	ListMovies() {
-		return this.moviesService.ListMovies();
+	ListMovies(@Query('page') page?: number, @Query('limit') limit?: number) {
+		return this.moviesService.ListMovies(page, limit);
 	};
 
 	@ApiOperation({ summary: 'List one movie' })
@@ -21,15 +22,9 @@ export class MoviesController {
 		return this.moviesService.ListOneMovie(id);
 	};
 
-	@ApiOperation({ summary: 'List movies by genre' })
-	@Get('listMoviesByGenre\:genre')
-	listMoviesByGenre(@Param('genre') genre: string) {
-		return this.moviesService.listMoviesByGenre(genre);
-	};
-
 	@ApiOperation({ summary: 'Search movies by filters' })
 	@Get('SearchMovies')
-	SearchMovies(@Query() allQueryParams: { title?: string, genre?: string }) {
+	SearchMovies(@Query() allQueryParams: { title?: string, genre?: string, page?: number, limit?: number }) {
 		return this.moviesService.SearchMovies(allQueryParams.title, allQueryParams.genre);
 	};
 

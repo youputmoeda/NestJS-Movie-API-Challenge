@@ -1,4 +1,4 @@
-// src/movies/movies.module.ts
+// src/genres/genre.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Genre } from './entities/genre.entity';

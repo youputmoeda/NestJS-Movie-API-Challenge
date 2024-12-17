@@ -1,3 +1,4 @@
+// src/genres/genre.controller.ts
 import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { GenresService } from "./genres.service";

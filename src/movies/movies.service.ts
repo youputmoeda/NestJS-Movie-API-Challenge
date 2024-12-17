@@ -1,3 +1,4 @@
+// src/movies/movie.service.ts
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Movie } from "./entities/movie.entity";
@@ -12,22 +13,19 @@ export class MoviesService {
 		private readonly movieRepository: Repository<Movie>,
 	) { }
 
-	ListMovies() {
-		return this.movieRepository.find();
+	ListMovies(page = 1, limit = 10) {
+		const skip = (page - 1) * limit;
+		return this.movieRepository.createQueryBuilder('movie')
+			.skip(skip)
+			.take(limit)
+			.getMany();
 	}
 
 	ListOneMovie(id: number) {
 		return this.movieRepository.findOne({ where: { id } });
 	}
 
-	listMoviesByGenre(genre: string) {
-		return this.movieRepository
-			.createQueryBuilder('movie')
-			.where("CONCAT(',', movie.genres, ',') LIKE :g", { g: `%,${genre},%` })
-			.getMany();
-	}
-
-	async SearchMovies(title?: string, genre?: string) {
+	async SearchMovies(title?: string, genre?: string, page = 1, limit = 10) {
 		const queryDbContext = this.movieRepository.createQueryBuilder('movie');
 
 		if (title) {
@@ -46,6 +44,11 @@ export class MoviesService {
 					pattern: `%,${genre},%`
 				})
 		}
+
+		const skip = (page - 1) * limit;
+
+		queryDbContext.take(limit)
+		queryDbContext.skip(skip);
 
 		return queryDbContext.getMany();
 	}
