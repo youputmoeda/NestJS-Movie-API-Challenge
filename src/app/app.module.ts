@@ -2,9 +2,9 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MoviesModule } from 'src/movies/movies.module';
-import { GenresModule } from 'src/genres/genres.module';
-import { LoggerMiddleware } from 'src/utils/logger.middleware';
+import { MoviesModule } from '../movies/movies.module';
+import { GenresModule } from '../genres/genres.module';
+import { LoggerMiddleware } from '../utils/logger.middleware';
 
 @Module({
   imports: [

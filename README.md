@@ -1,99 +1,237 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🎬 **NestJS Movies & Genres API**  
+A robust and scalable REST API for managing **Movies** and **Genres**. Built with **NestJS**, this project implements CRUD operations, validation, and Swagger documentation. Ideal for building movie management systems, learning backend concepts, or integrating with frontend clients.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+---
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## **🚀 Features**
 
-## Description
+- ✅ **Movies Management**: CRUD operations for movies (Create, Read, Update, Delete).  
+- ✅ **Genres Management**: CRUD operations for genres with relationships to movies.  
+- ✅ **Pagination**: Paginated results for movie lists.  
+- ✅ **Validation**: Ensures request payloads are validated using **class-validator**.  
+- ✅ **Error Handling**: Custom exceptions for better error messages.  
+- ✅ **Swagger Documentation**: Interactive API docs via Swagger UI.  
+- ✅ **Middleware Logging**: Custom middleware for request logging.  
+- ✅ **Unit & E2E Tests**: Comprehensive testing using Jest.  
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## **🛠️ Tech Stack**
 
-```bash
-$ npm install
-```
+- **NestJS** - Backend framework  
+- **TypeScript** - Type-safe development  
+- **TypeORM** - Database ORM  
+- **PostgreSQL** - Default database (configurable)  
+- **Swagger** - API documentation  
+- **Jest** - Testing framework  
 
-## Compile and run the project
+---
+
+## **📁 Project Structure**
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+src/
+│
+├── app/                # Main application module
+├── movies/             # Movies module
+│   ├── dto/            # Data Transfer Objects for Movies
+│   ├── entities/       # Movie Entity (TypeORM)
+│   ├── exceptions/     # Custom exceptions for Movies
+│   ├── movies.service.ts  # Business logic for Movies
+│   ├── movies.controller.ts  # Movie API endpoints
+│   ├── movies.module.ts  # Movies module setup
+│   └── tests/          # Unit tests for Movies module
+│
+├── genres/             # Genres module
+│   ├── dto/            # Data Transfer Objects for Genres
+│   ├── entities/       # Genre Entity (TypeORM)
+│   ├── exceptions/     # Custom exceptions for Genres
+│   ├── genres.service.ts  # Business logic for Genres
+│   ├── genres.controller.ts  # Genre API endpoints
+│   ├── genres.module.ts  # Genres module setup
+│   └── tests/          # Unit tests for Genres module
+│
+├── middleware/         # Custom middleware (LoggerMiddleware)
+├── main.ts             # Entry point to bootstrap the app
+└── swagger.json        # Swagger configuration
 ```
 
-## Run tests
+---
+
+## **📦 Installation**
+Follow the steps below to set up the project locally.
+
+### **1. Clone the Repository**
+
+Clone this repository to your local machine using Git:
+
+```bash git clone https://github.com/your-username/nestjs-movie-api.git
+cd nestjs-movie-api
+```
+
+### **2. Install Dependencies**
+
+Ensure you have **Node.js** (v14+) and **npm** or **Yarn** installed.
+
+Run the following command to install project dependencies:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
+### **3. Configure the Environment**
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Create a `.env` file in the project root directory and add the following configurations:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+```env
+PORT=3000
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USER=your_db_user
+DATABASE_PASSWORD=your_db_password
+DATABASE_NAME=movies_db
+```
 
+### **4. Set Up the Database**
+Ensure you have a PostgreSQL database running.
+
+Update your database details in the .env file.
+Run the TypeORM migrations (if applicable) to create the required tables:
 ```bash
-$ npm install -g mau
-$ mau deploy
+npm run typeorm migration:run
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### **5. Run the Application**
+Start the server using one of the following modes:
+Development (with hot reload):
+```bash
+npm run start:dev
+```
+Production:
+```bash
+npm run start:prod
+```
+### **6. Access the API**
+Once the server is running, you can access the API at:
 
-## Resources
+Base URL: http://localhost:3000
+Swagger Documentation: http://localhost:3000/api
+The Swagger UI provides an interactive interface to test all the endpoints.
 
-Check out a few resources that may come in handy when working with NestJS:
+## **🧪 Run Tests**
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+To ensure the application works as expected, you can run the following tests:
 
-## Support
+Unit Tests:
+```bash
+npm run test
+```
+End-to-End (e2e) Tests:
+```bash
+npm run test:e2e
+```
+Test Coverage:
+```bash
+npm run test:cov
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## **✨ Implemented Functionalities**
 
-## Stay in touch
+### **1. Movies Management**
+Add a new movie.
+Retrieve a list of movies with optional pagination.
+Search movies by title and genre.
+Retrieve movie details by ID.
+Update movie details.
+Delete a movie by ID.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### **2. Genres Management**
+Add a new genre.
+Retrieve a list of all genres.
+Retrieve genre details by ID.
+Update genre details.
+Delete a genre by ID and remove its references in movies.
 
-## License
+### **3. Validation**
+Input validation for all request payloads using class-validator.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### **4. Error Handling**
+Custom exceptions for movies and genres when entities are not found.
+
+### **5. Middleware Logging**
+Logs all incoming requests and response times.
+
+### **6. Swagger API Documentation**
+Provides an interactive API interface for testing endpoints.
+
+### **7. Testing**
+Unit tests for all services and controllers.
+
+## **🛠️ API Endpoints**
+
+### **Movies Endpoints**
+
+| Method   | Endpoint              | Description                     |
+|----------|-----------------------|---------------------------------|
+| `GET`    | `/ListMovies`         | Retrieve a paginated list of movies. |
+| `GET`    | `/ListOneMovie/:id`   | Retrieve details of a specific movie by its ID. |
+| `GET`    | `/SearchMovies`       | Search for movies by title or genre. |
+| `POST`   | `/AddMovie`           | Add a new movie to the database. |
+| `PATCH`  | `/UpdateMovie/:id`    | Update an existing movie by its ID. |
+| `DELETE` | `/DeleteMovie/:id`    | Delete a specific movie by its ID. |
+
+---
+
+### **Genres Endpoints**
+
+| Method   | Endpoint              | Description                     |
+|----------|-----------------------|---------------------------------|
+| `GET`    | `/ListGenres`         | Retrieve a list of all genres.  |
+| `GET`    | `/ListOneGenre/:id`   | Retrieve details of a specific genre by its ID. |
+| `POST`   | `/AddGenre`           | Add a new genre to the database. |
+| `PATCH`  | `/UpdateGenre/:id`    | Update an existing genre by its ID. |
+| `DELETE` | `/DeleteGenre/:id`    | Delete a specific genre by its ID. |
+
+---
+
+### **📌 Notes:**
+
+- **Pagination**:  
+  For the `ListMovies` endpoint, pagination parameters (`page`, `limit`) can be passed as query parameters.  
+
+  Example:  
+  ```http
+  GET /ListMovies?page=1&limit=10
+  ```
+
+- **SearchMovies**
+
+  Allows searching for movies based on **title** and **genre**. Both `title` and `genre` are optional query parameters.
+
+  Example:
+  ```http
+  GET /SearchMovies?title=Inception&genre=Sci-Fi
+  ```
+
+  ### **Request Payload**
+
+For the following endpoints, a **JSON payload** must be provided:  
+
+- **AddMovie**  
+- **AddGenre**  
+- **UpdateMovie**  
+- **UpdateGenre**  
+
+---
+
+#### **AddMovie Example**
+
+```json
+{
+  "title": "Inception",
+  "description": "A mind-bending thriller",
+  "releaseDate": "2010-07-16",
+  "genres": ["Sci-Fi", "Action"]
+}
+```
+
