@@ -65,7 +65,8 @@ Follow the steps below to set up the project locally.
 
 Clone this repository to your local machine using Git:
 
-```bash git clone https://github.com/your-username/nestjs-movie-api.git
+```bash 
+git clone https://github.com/your-username/nestjs-movie-api.git
 cd nestjs-movie-api
 ```
 
