@@ -21,6 +21,7 @@ describe('MovieController', () => {
 		ListOneMovie: jest.fn(),
 		SearchMovies: jest.fn(),
 		AddMovie: jest.fn(),
+		AddMultipleMovies: jest.fn(),
 		UpdateMovie: jest.fn(),
 		DeleteMovie: jest.fn().mockResolvedValue({ deleted: true }),
 	};
@@ -158,6 +159,52 @@ describe('MovieController', () => {
 
 			await expect(moviesController.AddMovie(invalidMovieDto)).rejects.toThrow('Invalid data');
 			expect(moviesService.AddMovie).toHaveBeenCalledWith(invalidMovieDto);
+		});
+	});
+
+	/**
+	 * Tests for AddMultipleMovies endpoint.
+	 */
+	describe('AddMultipleMovies', () => {
+		it('should add multiple movies successfully', async () => {
+			const createMoviesDto: CreateMovieDto[] = [
+				{
+					title: 'Inception',
+					description: 'A mind-bending thriller',
+					releaseDate: '2010-07-16',
+					genres: ['Sci-Fi', 'Action'],
+				},
+				{
+					title: 'The Matrix',
+					description: 'A dystopian future thriller',
+					releaseDate: '1999-03-31',
+					genres: ['Sci-Fi', 'Action'],
+				},
+			];
+
+			const savedMovies = createMoviesDto.map((movie, index) => ({
+				id: index + 1,
+				...movie,
+				releaseDate: new Date(movie.releaseDate),
+			}));
+
+			jest.spyOn(moviesService, 'AddMultipleMovies').mockResolvedValue(savedMovies);
+
+			const result = await moviesController.AddMultipleMovies(createMoviesDto);
+			expect(result).toEqual(savedMovies);
+			expect(moviesService.AddMultipleMovies).toHaveBeenCalledWith(createMoviesDto);
+		});
+
+
+		it('should throw a 400 error if data is invalid', async () => {
+			const invalidMoviesDto: CreateMovieDto[] = [
+				{ title: '', description: '', releaseDate: '', genres: [] }, // Invalid movie data
+			];
+
+			jest.spyOn(moviesService, 'AddMultipleMovies').mockRejectedValue(new Error('Invalid data'));
+
+			await expect(moviesController.AddMultipleMovies(invalidMoviesDto)).rejects.toThrow('Invalid data');
+			expect(moviesService.AddMultipleMovies).toHaveBeenCalledWith(invalidMoviesDto);
 		});
 	});
 

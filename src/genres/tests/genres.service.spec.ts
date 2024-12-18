@@ -123,6 +123,57 @@ describe('GenresService', () => {
 			expect(genreRepository.create).toHaveBeenCalledWith(createGenreDto);
 			expect(genreRepository.save).toHaveBeenCalledWith(savedGenre);
 		});
+
+		it('should throw an error if the database save operation fails for AddGenre', async () => {
+			const createGenreDto: CreateGenreDto = { name: 'Comedy' };
+
+			// Mock create and save operations
+			mockGenreRepository.create.mockImplementation((dto) => ({ ...dto }));
+			mockGenreRepository.save.mockRejectedValue(new Error('Database error'));
+
+			// Expect AddGenre to throw the database error
+			await expect(genresService.AddGenre(createGenreDto)).rejects.toThrow('Database error');
+
+			// Verify the repository interactions
+			expect(mockGenreRepository.create).toHaveBeenCalledWith(createGenreDto);
+			expect(mockGenreRepository.create).toHaveBeenCalledTimes(1);
+			expect(mockGenreRepository.save).toHaveBeenCalledWith(expect.objectContaining(createGenreDto));
+		});
+	});
+
+	/**
+	 * Tests for the `AddMultipleGenres` method.
+	 */
+	describe('AddMultipleGenres', () => {
+		it('should add multiple genres successfully', async () => {
+			const createGenresDto: CreateGenreDto[] = [
+				{ name: 'Action' },
+				{ name: 'Drama' },
+			];
+			const genresToSave = createGenresDto.map((dto, index) => ({ id: index + 1, ...dto }));
+
+			mockGenreRepository.create.mockImplementation((dto) => ({ ...dto }));
+			mockGenreRepository.save.mockResolvedValue(genresToSave);
+
+			const result = await genresService.AddMultipleGenres(createGenresDto);
+			expect(result).toEqual(genresToSave);
+			expect(genreRepository.create).toHaveBeenCalledTimes(2);
+			expect(genreRepository.save).toHaveBeenCalledWith(expect.any(Array));
+		});
+
+		it('should throw an error if save operation fails', async () => {
+			const createGenresDto: CreateGenreDto[] = [
+				{ name: 'Comedy' },
+				{ name: 'Fantasy' },
+			];
+
+			mockGenreRepository.create.mockImplementation((dto) => ({ ...dto }));
+			mockGenreRepository.save.mockRejectedValue(new Error('Database error'));
+
+			await expect(genresService.AddMultipleGenres(createGenresDto)).rejects.toThrow('Database error');
+			expect(genreRepository.create).toHaveBeenCalledTimes(2);
+			expect(genreRepository.save).toHaveBeenCalledWith(expect.any(Array));
+		});
 	});
 
 	/**

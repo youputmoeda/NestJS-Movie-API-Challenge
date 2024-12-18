@@ -194,6 +194,54 @@ describe('MovieService', () => {
 	});
 
 	/**
+	 * Tests for the AddMultipleMovies method.
+	 */
+	describe('AddMultipleMovies', () => {
+		it('should add multiple movies to the database', async () => {
+			const createMoviesDto: CreateMovieDto[] = [
+				{
+					title: 'Inception',
+					description: 'A mind-bending thriller',
+					releaseDate: '2010-07-16',
+					genres: ['Sci-Fi', 'Action'],
+				},
+				{
+					title: 'The Matrix',
+					description: 'A dystopian future thriller',
+					releaseDate: '1999-03-31',
+					genres: ['Sci-Fi', 'Action'],
+				},
+			];
+
+			const savedMovies = createMoviesDto.map((movie, index) => ({
+				id: index + 1,
+				...movie,
+			}));
+
+			mockMovieRepository.create.mockImplementation((dto) => dto);
+			mockMovieRepository.save.mockResolvedValue(savedMovies);
+
+			const result = await moviesService.AddMultipleMovies(createMoviesDto);
+
+			expect(result).toEqual(savedMovies);
+			expect(mockMovieRepository.create).toHaveBeenCalledTimes(createMoviesDto.length);
+			expect(mockMovieRepository.save).toHaveBeenCalledWith(expect.any(Array));
+		});
+
+		it('should throw an error if any movie data is invalid', async () => {
+			const invalidMoviesDto: CreateMovieDto[] = [
+				{ title: '', description: '', releaseDate: '', genres: [] }, // Invalid movie
+			];
+
+			mockMovieRepository.create.mockImplementation((dto) => dto);
+
+			await expect(moviesService.AddMultipleMovies(invalidMoviesDto)).rejects.toThrow('Invalid data');
+			expect(mockMovieRepository.create).not.toHaveBeenCalled();
+			expect(mockMovieRepository.save).not.toHaveBeenCalled(); // Ensure save is not called
+		});
+	});
+
+	/**
 	 * Tests for the UpdateMovie method.
 	 */
 	describe('UpdateMovie', () => {

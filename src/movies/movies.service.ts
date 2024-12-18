@@ -25,7 +25,7 @@ export class MoviesService {
 	 * @param {number} limit - The number of items per page (default is 10).
 	 * @returns {Promise<Movie[]>} A list of movies within the specified page.
 	 */
-	async ListMovies(page = 1, limit = 10) {
+	async ListMovies(page: number = 1, limit: number = 10): Promise<Movie[]> {
 		const skip = (page - 1) * limit;
 		return await this.movieRepository.createQueryBuilder('movie')
 			.skip(skip)
@@ -41,7 +41,7 @@ export class MoviesService {
 	 * @throws {Error} If the provided ID is negative.
 	 * @throws {MovieNotFoundException} If no movie is found with the given ID.
 	 */
-	async ListOneMovie(id: number) {
+	async ListOneMovie(id: number): Promise<Movie> {
 		if (id < 0)
 			throw new Error("Id can't be negative");
 
@@ -62,7 +62,7 @@ export class MoviesService {
 	 * @returns {Promise<Movie[]>} A list of movies matching the search criteria.
 	 * @throws {Error} If pagination parameters are invalid (page or limit <= 0).
 	 */
-	async SearchMovies(title?: string, genre?: string, page = 1, limit = 10) {
+	async SearchMovies(title?: string, genre?: string, page: number = 1, limit: number = 10): Promise<Movie[]> {
 		if (page <= 0 || limit <= 0) {
 			throw new Error('Invalid pagination parameters');
 		}
@@ -101,13 +101,31 @@ export class MoviesService {
 	 * @returns {Promise<Movie>} The newly created movie.
 	 * @throws {Error} If required movie fields are missing.
 	 */
-	async AddMovie(createMovieDto: CreateMovieDto) {
+	async AddMovie(createMovieDto: CreateMovieDto): Promise<Movie> {
 		if (!createMovieDto.title || !createMovieDto.description || !createMovieDto.releaseDate) {
 			throw new Error('Invalid data');
 		}
 
 		const movie = this.movieRepository.create(createMovieDto);
 		return await this.movieRepository.save(movie);
+	}
+
+	/**
+   	 * Adds multiple movies to the database.
+   	 * 
+   	 * @param {CreateMovieDto[]} createMovieDtos - Array of movie details to be added.
+   	 * @returns {Promise<Movie[]>} List of newly created movies.
+   	 * @throws {Error} If any movie data is invalid.
+   	 */
+	async AddMultipleMovies(createMovieDtos: CreateMovieDto[]): Promise<Movie[]> {
+		const movies = createMovieDtos.map((movieDto) => {
+			if (!movieDto.title || !movieDto.description || !movieDto.releaseDate) {
+				throw new Error('Invalid data');
+			}
+			return this.movieRepository.create(movieDto);
+		});
+
+		return await this.movieRepository.save(movies);
 	}
 
 	/**
@@ -119,7 +137,7 @@ export class MoviesService {
 	 * @throws {Error} If the provided ID is negative.
 	 * @throws {MovieNotFoundException} If no movie is found with the given ID.
 	 */
-	async UpdateMovie(id: number, updateMovieDto: UpdateMovieDto) {
+	async UpdateMovie(id: number, updateMovieDto: UpdateMovieDto): Promise<Movie> {
 		if (id < 0)
 			throw new Error("Id can't be negative");
 
@@ -140,7 +158,7 @@ export class MoviesService {
 	 * @throws {Error} If the provided ID is negative.
 	 * @throws {NotFoundException} If no movie is found with the given ID.
 	 */
-	async DeleteMovie(id: number) {
+	async DeleteMovie(id: number): Promise<Movie> {
 		if (id < 0)
 			throw new Error("Id can't be negative");
 

@@ -178,6 +178,7 @@ Unit tests for all services and controllers.
 | `GET`    | `/ListOneMovie/:id`   | Retrieve details of a specific movie by its ID. |
 | `GET`    | `/SearchMovies`       | Search for movies by title or genre. |
 | `POST`   | `/AddMovie`           | Add a new movie to the database. |
+| `POST`   | `/AddMultipleMovies`  | Add multiple movies to the database. |
 | `PATCH`  | `/UpdateMovie/:id`    | Update an existing movie by its ID. |
 | `DELETE` | `/DeleteMovie/:id`    | Delete a specific movie by its ID. |
 
@@ -190,6 +191,7 @@ Unit tests for all services and controllers.
 | `GET`    | `/ListGenres`         | Retrieve a list of all genres.  |
 | `GET`    | `/ListOneGenre/:id`   | Retrieve details of a specific genre by its ID. |
 | `POST`   | `/AddGenre`           | Add a new genre to the database. |
+| `POST`   | `/AddMultipleGenres`  | Add multiple genres to the database. |
 | `PATCH`  | `/UpdateGenre/:id`    | Update an existing genre by its ID. |
 | `DELETE` | `/DeleteGenre/:id`    | Delete a specific genre by its ID. |
 

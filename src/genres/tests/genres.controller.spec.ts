@@ -17,6 +17,7 @@ describe('GenreController', () => {
 		ListGenres: jest.fn().mockResolvedValue([]),
 		ListOneGenre: jest.fn(),
 		AddGenre: jest.fn(),
+		AddMultipleGenres: jest.fn(),
 		UpdateGenre: jest.fn(),
 		DeleteGenre: jest.fn().mockResolvedValue({ deleted: true }),
 	};
@@ -125,6 +126,39 @@ describe('GenreController', () => {
 
 			await expect(genresController.AddGenre(invalidGenreDto)).rejects.toThrow('Invalid data');
 			expect(genresService.AddGenre).toHaveBeenCalledWith(invalidGenreDto);
+		});
+	});
+
+	/**
+	 * Tests for the `AddMultipleGenres` method.
+	 */
+	describe('AddMultipleGenres', () => {
+		it('should add multiple genres successfully', async () => {
+			const createGenresDto: CreateGenreDto[] = [
+				{ name: 'Action' },
+				{ name: 'Drama' },
+			];
+			const expectedGenres = [
+				{ id: 1, name: 'Action' },
+				{ id: 2, name: 'Drama' },
+			];
+
+			mockGenresService.AddMultipleGenres.mockResolvedValue(expectedGenres);
+
+			const result = await genresController.AddMultipleGenres(createGenresDto);
+			expect(result).toEqual(expectedGenres);
+			expect(genresService.AddMultipleGenres).toHaveBeenCalledWith(createGenresDto);
+		});
+
+		it('should throw an error if service fails', async () => {
+			const createGenresDto: CreateGenreDto[] = [
+				{ name: 'Invalid Genre' },
+			];
+
+			mockGenresService.AddMultipleGenres.mockRejectedValue(new Error('Service error'));
+
+			await expect(genresController.AddMultipleGenres(createGenresDto)).rejects.toThrow('Service error');
+			expect(genresService.AddMultipleGenres).toHaveBeenCalledWith(createGenresDto);
 		});
 	});
 
