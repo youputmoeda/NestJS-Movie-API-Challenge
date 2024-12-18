@@ -1,0 +1,472 @@
+{
+	"info": {
+		"_postman_id": "f0940bc5-3c5c-4440-a9a9-de43fc4835a1",
+		"name": "MovieAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38105757"
+	},
+	"item": [
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "ListMovies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/Movies/ListMovies?page=1&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Movies",
+								"ListMovies"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:3000/Movies/ListMovies?page=1&limit=10\" \\\r\n-H \"Accept: application/json\"\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "ListOneMovie",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/Movies/ListOneMovie1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Movies",
+								"ListOneMovie1"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:3000/Movies/ListOneMovie1' \\\r\n  -H 'accept: */*'"
+					},
+					"response": []
+				},
+				{
+					"name": "SearchMovies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/Movies/SearchMovies?title=Matrix&genre=Action",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Movies",
+								"SearchMovies"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Matrix"
+								},
+								{
+									"key": "genre",
+									"value": "Action"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:3000/Movies/SearchMovies?title=Matrix&genre=Action\" \\\r\n-H \"Accept: application/json\"\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "AddMovie",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"The Matrix\",\r\n  \"description\": \"A hacker discovers reality is a simulation.\",\r\n  \"releaseDate\": \"1999-03-31\",\r\n  \"genres\": [\"Sci-Fi\", \"Action\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Movies/AddMovie",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Movies",
+								"AddMovie"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"http://localhost:3000/Movies/AddMovie\" \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"title\": \"The Matrix\",\r\n  \"description\": \"A hacker discovers reality is a simulation.\",\r\n  \"releaseDate\": \"1999-03-31\",\r\n  \"genres\": [\"Sci-Fi\", \"Action\"]\r\n}'\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "AddMultipleMovies",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  \"string\"\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Movies/AddMultipleMovies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Movies",
+								"AddMultipleMovies"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:3000/Movies/AddMultipleMovies' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '[\r\n  \"string\"\r\n]'"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateMovie",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"The Matrix Reloaded\",\r\n  \"description\": \"The second installment of The Matrix trilogy.\",\r\n  \"releaseDate\": \"2003-05-15\",\r\n  \"genres\": [\"Sci-Fi\", \"Action\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Movies/UpdateMovie1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Movies",
+								"UpdateMovie1"
+							]
+						},
+						"description": "Generated from cURL: curl -X PATCH \"http://localhost:3000/Movies/UpdateMovie1\" \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"title\": \"The Matrix Reloaded\",\r\n  \"description\": \"The second installment of The Matrix trilogy.\",\r\n  \"releaseDate\": \"2003-05-15\",\r\n  \"genres\": [\"Sci-Fi\", \"Action\"]\r\n}'\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteMovie",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/Movies/DeleteMovie1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Movies",
+								"DeleteMovie1"
+							]
+						},
+						"description": "Generated from cURL: curl -X DELETE \"http://localhost:3000/Movies/DeleteMovie1\" \\\r\n-H \"Accept: application/json\"\r\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Genre",
+			"item": [
+				{
+					"name": "ListGenres",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/Genres/ListGenres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Genres",
+								"ListGenres"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:3000/Genres/ListGenres\" \\\r\n-H \"Accept: application/json\"\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "ListOneGenre",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/Genres/ListOneGenre1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Genres",
+								"ListOneGenre1"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:3000/Genres/ListOneGenre1\" \\\r\n-H \"Accept: application/json\"\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "AddGenre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Action\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Genres/AddGenre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Genres",
+								"AddGenre"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"http://localhost:3000/Genres/AddGenre\" \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"name\": \"Action\"\r\n}'\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "AddMultipleGenres",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  { \"name\": \"Sci-Fi\" },\r\n  { \"name\": \"Action\" }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Genres/AddMultipleGenres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Genres",
+								"AddMultipleGenres"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:3000/Genres/AddMultipleGenres' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '[\r\n  { \"name\": \"Sci-Fi\" },\r\n  { \"name\": \"Action\" }\r\n]'"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateGenre",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Adventure\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Genres/UpdateGenre1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Genres",
+								"UpdateGenre1"
+							]
+						},
+						"description": "Generated from cURL: curl -X PATCH \"http://localhost:3000/Genres/UpdateGenre1\" \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\r\n  \"name\": \"Adventure\"\r\n}'\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteGenre",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/Genres/DeleteGenre1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Genres",
+								"DeleteGenre1"
+							]
+						},
+						"description": "Generated from cURL: curl -X DELETE \"http://localhost:3000/Genres/DeleteGenre1\" \\\r\n-H \"Accept: application/json\"\r\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hello World",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:3000/' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "default"
+		}
+	]
+}
